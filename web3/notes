@@ -1,0 +1,80 @@
+// contract TipperDapp is FunctionsClient, ConfirmedOwner {
+
+// using FunctionsRequest for FunctionsRequest.Request;
+
+// bytes32 public donId; // DON ID for the Functions DON to which the requests are sent
+
+// bytes32 public s_lastRequestId;
+// bytes public s_lastResponse;
+// bytes public s_lastError;
+
+// string private source;
+// FunctionsRequest.Location private secretsLocation;
+// bytes private encryptedSecretsReference;
+// bytes[] private bytesArgs;
+// uint64 private subscriptionId;
+// uint32 private callbackGasLimit;
+
+// constructor(
+//     string memory _source,
+//     FunctionsRequest.Location _secretsLocation,
+//     bytes memory _encryptedSecrestsReference,
+//     bytes[] memory _bytesArgs,
+//     uint64 _subscriptionId,
+//     uint32 _callbackGasLimit,
+//     address router,
+//     bytes32 _donId
+// ) FunctionsClient(router) ConfirmedOwner(msg.sender) {
+//     donId = _donId;
+//     source = _source;
+//     secretsLocation = _secretsLocation;
+//     encryptedSecretsReference = _encryptedSecrestsReference;
+//     bytesArgs = _bytesArgs;
+//     subscriptionId = _subscriptionId;
+//     callbackGasLimit = _callbackGasLimit;
+// }
+
+// /**
+//  * @notice Set the DON ID
+//  * @param newDonId New DON ID
+//  */
+// function setDonId(bytes32 newDonId) external onlyOwner {
+//     donId = newDonId;
+// }
+
+// function sendRequest(string[] calldata args) external onlyOwner {
+//     FunctionsRequest.Request memory req; // Struct API reference: https://docs.chain.link/chainlink-functions/api-reference/functions-request
+//     req.initializeRequest(
+//         FunctionsRequest.Location.Inline,
+//         FunctionsRequest.CodeLanguage.JavaScript,
+//         source
+//     );
+//     req.secretsLocation = secretsLocation;
+//     req.encryptedSecretsReference = encryptedSecretsReference;
+//     if (args.length > 0) {
+//         req.setArgs(args);
+//     }
+//     if (bytesArgs.length > 0) {
+//         req.setBytesArgs(bytesArgs);
+//     }
+//     s_lastRequestId = _sendRequest(
+//         req.encodeCBOR(),
+//         subscriptionId,
+//         callbackGasLimit,
+//         donId
+//     );
+// }
+
+// function fulfillRequest(
+//     bytes32 requestId,
+//     bytes memory response,
+//     bytes memory err
+// ) internal override {
+//     s_lastResponse = response;
+//     s_lastError = err;
+// }
+
+import "@chainlink/contracts/src/v0.8/vrf/VRFConsumerBase.sol";
+import {FunctionsClient} from "@chainlink/contracts/src/v0.8/functions/dev/v1_0_0/FunctionsClient.sol";
+import {ConfirmedOwner} from "@chainlink/contracts/src/v0.8/shared/access/ConfirmedOwner.sol";
+import {FunctionsRequest} from "@chainlink/contracts/src/v0.8/functions/dev/v1_0_0/libraries/FunctionsRequest.sol";

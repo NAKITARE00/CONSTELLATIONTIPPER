@@ -15,13 +15,14 @@
   },
   "dependencies": {
     "@chainlink/contracts": "^0.8.0",
-    "@thirdweb-dev/contracts": "^3.8.0",
-    "zksync-web3": "^0.14.3",
+    "@chainlink/contracts-ccip": "^0.7.6",
     "@chainlink/env-enc": "^1.0.5",
     "@chainlink/functions-toolkit": "^0.2.6",
+    "@thirdweb-dev/contracts": "^3.8.0",
     "@types/node": "^20.6.2",
     "dotenv": "^16.3.1",
     "nodemon": "^3.0.1",
-    "typescript": "^5.2.2"
+    "typescript": "^5.2.2",
+    "zksync-web3": "^0.14.3"
   }
 }

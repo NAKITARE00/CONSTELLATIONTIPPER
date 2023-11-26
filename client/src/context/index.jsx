@@ -12,6 +12,7 @@ export const StateContextProvider = ({ children }) => {
     const { mutateAsync: createElection } = useContractWrite(contract, 'createElection');
     const { mutateAsync: registerTipper } = useContractWrite(contract, 'registerTipper');
     const { mutateAsync: registerArtist } = useContractWrite(contract, 'registerArtist');
+    const { mutateAsync: make_Tip } = useContractWrite(contract, 'make_Tip');
     const address = useAddress();
     const connect = useMetamask();
 

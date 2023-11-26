@@ -5,6 +5,14 @@ import { nodePolyfills } from "vite-plugin-node-polyfills";
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react(), nodePolyfills()],
+  resolve: {
+    alias: {
+      src: "/src",
+      components: "/src/components"
+
+    }
+  },
+  extensions: ['.js', '.jsx', '.json', '.vue', '.svg'],
   define: {
     "process.env": {},
   },
